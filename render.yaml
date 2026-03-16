@@ -1,0 +1,16 @@
+# render.yaml — Fraud Guard v3.0 Streamlit Dashboard
+# Deploy as a Web Service on Render.com
+
+services:
+  - type: web
+    name: fraud-ui-193665
+    runtime: python
+    region: oregon
+    plan: free
+
+    buildCommand: pip install --upgrade pip && pip install --prefer-binary --only-binary=:all: -r requirements.txt
+    startCommand: streamlit run app.py --server.port $PORT --server.address 0.0.0.0 --server.headless true --server.enableCORS false --server.enableXsrfProtection false
+
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9

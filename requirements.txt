@@ -1,0 +1,20 @@
+# Fraud Guard v3.0 — requirements.txt
+# Pinned for Render.com free tier (Python 3.11, 512 MB RAM)
+# All packages use pre-built binary wheels — NO source compilation
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Streamlit dashboard
+streamlit==1.33.0
+
+# HTTP client (API calls)
+requests==2.31.0
+
+# Data
+pandas==2.0.3
+numpy==1.26.4
+
+# Visualisation
+plotly==5.18.0
+
+# Utilities
+python-dateutil==2.8.2
