@@ -152,7 +152,7 @@ def get_demo_data(n: int = 500, seed: int = 42) -> pd.DataFrame:
 def apply_chart(fig, height: int = 280, title: str = ""):
     """Apply white Power BI chart theme."""
     fig.update_layout(**CHART_CFG, height=height,
-                      title=dict(text=title, font=dict(size=12, color=C["navy"], weight=700), x=0))
+                      title=dict(text=title, font=dict(size=12, color=C["navy"]), x=0))
     fig.update_xaxes(**GRID)
     fig.update_yaxes(**GRID)
     return fig
