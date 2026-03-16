@@ -366,7 +366,7 @@ elif page == "Predict":
         if deduct > 0 and total_c/deduct > 10:
             signals.append(("🟡","Claim inflation", f"{total_c/deduct:.0f}× deductible"))
         if signals:
-            st.markdown(f"<div style='background:#FDE7E9;border:1px solid {C["red"]};border-radius:4px;padding:0.7rem 1rem;'>", unsafe_allow_html=True)
+            st.markdown(f"<div style='background:#FDE7E9;border:1px solid {C['red']};border-radius:4px;padding:0.7rem 1rem;'>", unsafe_allow_html=True)
             st.markdown(f"**{len(signals)} risk signal(s) detected before scoring:**")
             for ic, lbl, det in signals:
                 st.markdown(f"{ic} **{lbl}** — {det}")
@@ -529,7 +529,7 @@ elif page == "Predict":
                     f"padding:0.45rem;text-align:center;'>"
                     f"<div style='font-size:1rem;'>{ic2}</div>"
                     f"<div style='font-size:0.68rem;font-weight:700;color:#252423;'>{lbl}</div>"
-                    f"<div style='font-size:0.65rem;color:{C["grey"]};'>{det}</div></div>",
+                    f"<div style='font-size:0.65rem;color:{C['grey']};'>{det}</div></div>",
                     unsafe_allow_html=True,
                 )
 
@@ -563,7 +563,7 @@ elif page == "Predict":
                 f"<div style='background:#FFFFFF;border:1px solid {ac};border-left:4px solid {ac};"
                 f"border-radius:4px;padding:0.9rem 1rem;'>"
                 f"<div style='font-weight:700;color:{ac};font-size:0.85rem;margin-bottom:4px;'>📋 {action[:60]}</div>"
-                f"<div style='font-size:0.78rem;color:{C["grey"]};line-height:1.5;'>"
+                f"<div style='font-size:0.78rem;color:{C['grey']};line-height:1.5;'>"
                 f"{result.get('adjuster_summary','')[:280]}</div></div>",
                 unsafe_allow_html=True,
             )
@@ -591,8 +591,8 @@ elif page == "Predict":
             })
         else:
             st.markdown(
-                f"<div style='background:#FFFFFF;border:1px dashed {C["lgrey"]};border-radius:6px;"
-                f"padding:3rem;text-align:center;color:{C["grey"]};'>"
+                f"<div style='background:#FFFFFF;border:1px dashed {C['lgrey']};border-radius:6px;"
+                f"padding:3rem;text-align:center;color:{C['grey']};'>"
                 f"<div style='font-size:2rem;margin-bottom:0.5rem;'>🔍</div>"
                 f"<div style='font-weight:600;'>Fill in the claim form and click Score This Claim</div>"
                 f"<div style='font-size:0.78rem;margin-top:6px;'>Powered by XGBoost + Stacking Ensemble · SHAP explainability</div>"
@@ -977,7 +977,7 @@ elif page == "Alerts":
                                row["channel"],row["region"]),
                     unsafe_allow_html=True,
                 )
-                if st.button(f"ACK {row["transaction_id"][:12]}", key=f"ack_{row["transaction_id"]}",
+                if st.button(f"ACK {row['transaction_id'][:12]}", key=f"ack_{row['transaction_id']}",
                              use_container_width=True):
                     st.session_state.alerts_ack.add(row["transaction_id"]); st.rerun()
 
@@ -993,15 +993,15 @@ elif page == "Alerts":
                 st.markdown(detail_card({
                     "Transaction ID":   row["transaction_id"],
                     "Fraud Probability":f"{prob2*100:.1f}%",
-                    "Amount":           f"KES {row["amount"]:,.0f}",
+                    "Amount":           f"KES {row['amount']:,.0f}",
                     "Type":             row["type"],
                     "Channel":          row["channel"],
                     "Region":           row["region"],
                     "Sender":           row["sender"],
                     "Receiver":         row["receiver"],
-                    "Balance Before":   f"KES {row["oldbalanceOrg"]:,.0f}",
-                    "Balance After":    f"KES {row["newbalanceOrig"]:,.0f}",
-                    "Balance Drain":    f"KES {row["balance_drain"]:,.0f}",
+                    "Balance Before":   f"KES {row['oldbalanceOrg']:,.0f}",
+                    "Balance After":    f"KES {row['newbalanceOrig']:,.0f}",
+                    "Balance Drain":    f"KES {row['balance_drain']:,.0f}",
                     "Timestamp":        str(row["timestamp"])[:16],
                 }, bc2), unsafe_allow_html=True)
 
@@ -1337,12 +1337,12 @@ elif page == "Reports":
         ]
         for rc,title,border,items in rep_boxes:
             rc.markdown(
-                f"<div style='background:#FFFFFF;border:1px solid {C["lgrey"]};border-top:3px solid {border};"
+                f"<div style='background:#FFFFFF;border:1px solid {C['lgrey']};border-top:3px solid {border};"
                 f"border-radius:4px;padding:1rem;'>"
                 f"<div style='font-size:0.72rem;font-weight:700;color:{border};text-transform:uppercase;"
                 f"letter-spacing:1px;margin-bottom:8px;'>{title}</div>"
-                + "".join(f"<div style='font-size:0.8rem;color:{C["dark"]};padding:3px 0;"
-                          f"border-bottom:1px solid {C["lgrey"]};'>{it}</div>" for it in items)
+                + "".join(f"<div style='font-size:0.8rem;color:{C['dark']};padding:3px 0;"
+                          f"border-bottom:1px solid {C['lgrey']};'>{it}</div>" for it in items)
                 + "</div>",
                 unsafe_allow_html=True,
             )
@@ -1400,8 +1400,8 @@ elif page == "Reports":
         ]
         for name,edf,fname in exports3:
             ea,eb,ec = st.columns([2.5,1,1])
-            with ea: st.markdown(f"<div style='padding:6px 0;color:{C["dark"]};font-size:0.85rem;'>{name} — <span style='color:{C["grey"]};'>{len(edf):,} rows</span></div>",unsafe_allow_html=True)
-            with eb: st.markdown(f"<div style='padding:6px 0;color:{C["grey"]};font-size:0.8rem;'>KES {edf["amount"].sum()/1e6:.1f}M</div>",unsafe_allow_html=True)
+            with ea: st.markdown(f"<div style='padding:6px 0;color:{C['dark']};font-size:0.85rem;'>{name} — <span style='color:{C['grey']};'>{len(edf):,} rows</span></div>",unsafe_allow_html=True)
+            with eb: st.markdown(f"<div style='padding:6px 0;color:{C['grey']};font-size:0.8rem;'>KES {edf['amount'].sum()/1e6:.1f}M</div>",unsafe_allow_html=True)
             with ec: st.download_button("⬇️ CSV",edf.to_csv(index=False),fname,"text/csv",key=f"dl_{fname}",use_container_width=True)
 
 
@@ -1441,12 +1441,12 @@ elif page == "API":
                 mc2 = C["green"] if method=="GET" else C["amber"]
                 bc3 = C["green"] if alive else C["red"]
                 st.markdown(
-                    f"<div style='background:#FFFFFF;border:1px solid {C["lgrey"]};border-radius:4px;"
+                    f"<div style='background:#FFFFFF;border:1px solid {C['lgrey']};border-radius:4px;"
                     f"padding:0.45rem 1rem;margin-bottom:4px;display:flex;align-items:center;gap:0.8rem;'>"
                     f"<span style='background:{mc2}22;color:{mc2};border:1px solid {mc2};border-radius:3px;"
                     f"padding:1px 8px;font-family:monospace;font-size:0.7rem;font-weight:700;min-width:44px;text-align:center;'>{method}</span>"
-                    f"<span style='font-family:monospace;color:{C["blue"]};font-size:0.8rem;min-width:110px;'>{path}</span>"
-                    f"<span style='color:{C["grey"]};font-size:0.78rem;flex:1;'>{desc}</span>"
+                    f"<span style='font-family:monospace;color:{C['blue']};font-size:0.8rem;min-width:110px;'>{path}</span>"
+                    f"<span style='color:{C['grey']};font-size:0.78rem;flex:1;'>{desc}</span>"
                     f"<span style='color:{bc3};font-size:0.72rem;font-weight:700;'>{'● OK' if alive else '● DOWN'}</span>"
                     f"</div>",
                     unsafe_allow_html=True,
@@ -1560,8 +1560,8 @@ print(result["decision"], result["fraud_probability_pct"])
         for k,v in sys_info.items():
             st.markdown(
                 f"<div style='display:flex;justify-content:space-between;"
-                f"border-bottom:1px solid {C["lgrey"]};padding:5px 0;font-size:0.82rem;'>"
-                f"<span style='color:{C["grey"]};'>{k}</span>"
-                f"<span style='color:{C["dark"]};font-weight:600;'>{v}</span></div>",
+                f"border-bottom:1px solid {C['lgrey']};padding:5px 0;font-size:0.82rem;'>"
+                f"<span style='color:{C['grey']};'>{k}</span>"
+                f"<span style='color:{C['dark']};font-weight:600;'>{v}</span></div>",
                 unsafe_allow_html=True,
             )
