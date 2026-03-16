@@ -196,7 +196,6 @@ if page == "Home":
             textinfo="percent", textfont_size=11,
         ))
         fig2.update_layout(**CHART_CFG, height=230, showlegend=True,
-                           legend=dict(font=dict(size=10)),
                            annotations=[dict(text=f"<b>{fr:.1f}%</b>",
                                             x=0.5, y=0.5, showarrow=False,
                                             font=dict(size=14, color=C["red"]))])
