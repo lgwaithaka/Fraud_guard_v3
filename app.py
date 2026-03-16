@@ -865,11 +865,11 @@ elif page == "Accounts":
 
         sc1,sc2,sc3,sc4,sc5 = st.columns(5)
         for col2, args in zip([sc1,sc2,sc3,sc4,sc5],[
-            ("Risk Score",        f"{acct['risk_score']:.0f}/100",  acct["risk_label"],    rcolor),
-            ("Total Transactions",f"{acct['txn_count']:,}",         "",                    C["navy"]),
-            ("Fraud Cases",       f"{int(acct['fraud_count'])}",    f"{acct['fraud_rate']:.1f}% rate",C["red"]),
-            ("Avg Fraud Prob",    f"{acct['avg_prob']*100:.1f}%",   "",                    C["amber"]),
-            ("Max Single Amount", f"KES {acct['max_amount']/1e3:.0f}K","",                C["orange"]),
+            ("Risk Score",        f"{acct['risk_score']:.0f}/100",  acct["risk_label"],    None, rcolor),
+            ("Total Transactions",f"{acct['txn_count']:,}",         "",                    None, C["navy"]),
+            ("Fraud Cases",       f"{int(acct['fraud_count'])}",    f"{acct['fraud_rate']:.1f}% rate", None, C["red"]),
+            ("Avg Fraud Prob",    f"{acct['avg_prob']*100:.1f}%",   "",                    None, C["amber"]),
+            ("Max Single Amount", f"KES {acct['max_amount']/1e3:.0f}K","",                None, C["orange"]),
         ]):
             col2.markdown(kpi_card(*args), unsafe_allow_html=True)
 
@@ -950,11 +950,11 @@ elif page == "Alerts":
 
     ac1,ac2,ac3,ac4,ac5 = st.columns(5)
     for col2, args in zip([ac1,ac2,ac3,ac4,ac5],[
-        ("Open HIGH Alerts",   f"{len(unack)}",         "Unacknowledged",           C["red"]),
-        ("Total HIGH",         f"{len(high_risk)}",     "In period",                C["red"]),
-        ("MEDIUM Risk",        f"{len(med_risk)}",      "Monitoring required",      C["amber"]),
-        ("Acknowledged",       f"{len(st.session_state.alerts_ack)}","Cleared",     C["green"]),
-        ("Avg Risk Score",     f"{high_risk['fraud_probability'].mean()*100:.1f}%","High-risk avg",C["orange"]),
+        ("Open HIGH Alerts",   f"{len(unack)}",         "Unacknowledged",           None, C["red"]),
+        ("Total HIGH",         f"{len(high_risk)}",     "In period",                None, C["red"]),
+        ("MEDIUM Risk",        f"{len(med_risk)}",      "Monitoring required",      None, C["amber"]),
+        ("Acknowledged",       f"{len(st.session_state.alerts_ack)}","Cleared",     None, C["green"]),
+        ("Avg Risk Score",     f"{high_risk['fraud_probability'].mean()*100:.1f}%","High-risk avg", None, C["orange"]),
     ]):
         col2.markdown(kpi_card(*args), unsafe_allow_html=True)
 
