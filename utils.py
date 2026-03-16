@@ -167,15 +167,20 @@ def section(title: str, icon: str = ""):
     )
 
 def page_header(title: str, subtitle: str = ""):
+    sub_html = (
+        f"<div style='font-size:0.78rem;color:#A0B4D0;margin-top:5px;"
+        f"font-weight:400;letter-spacing:0.2px;'>{subtitle}</div>"
+        if subtitle else ""
+    )
     st.markdown(
-        f"<div style='font-size:1.35rem;font-weight:800;color:{C['navy']};margin-bottom:2px;'>{title}</div>",
+        f"<div style='background:linear-gradient(135deg,{C['navy']} 0%,{C['blue']} 100%);"
+        f"border-radius:8px;padding:1.4rem 1.8rem 1.3rem;margin-bottom:1.6rem;margin-top:0.2rem;"
+        f"box-shadow:0 2px 12px rgba(27,58,107,0.18);border-left:5px solid {C['amber']};'>"
+        f"<div style='font-size:1.45rem;font-weight:800;color:#FFFFFF;"
+        f"letter-spacing:0.3px;line-height:1.2;'>{title}</div>"
+        f"{sub_html}</div>",
         unsafe_allow_html=True,
     )
-    if subtitle:
-        st.markdown(
-            f"<div style='font-size:0.78rem;color:{C['grey']};margin-bottom:1rem;'>{subtitle}</div>",
-            unsafe_allow_html=True,
-        )
 
 def kpi_card(label: str, value: str, sub: str = "", delta=None, color: str = C["navy"]):
     delta_html = ""

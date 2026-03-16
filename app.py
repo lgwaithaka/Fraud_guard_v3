@@ -50,7 +50,18 @@ html, body, [class*="css"] {
     background-color: #F3F2F1 !important; color: #252423 !important;
 }
 .main, [data-testid="stAppViewContainer"] { background: #F3F2F1 !important; }
-.block-container { padding: 0.8rem 1.4rem 2rem !important; max-width: 1400px; }
+.block-container { padding: 2rem 1.6rem 2rem !important; max-width: 1400px; }
+
+/* Top accent bar */
+[data-testid="stAppViewContainer"]::before {
+    content: '';
+    display: block;
+    height: 4px;
+    background: linear-gradient(90deg, #1B3A6B 0%, #F2B705 60%, #D13438 100%);
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 9999;
+}
 
 /* Sidebar — navy brand bar */
 [data-testid="stSidebar"] {
