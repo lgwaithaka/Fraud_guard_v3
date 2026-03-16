@@ -1434,19 +1434,29 @@ elif page == "API":
 
         with api_c2:
             section("API Endpoints")
-            eps = [("GET","/","Service info",True),("GET","/health","Model status check",True),
-                   ("POST","/predict","Score a single claim",True),
-                   ("GET","/metrics","Model performance stats",True),("GET","/docs","Swagger UI",ok2)]
-            for method,path,desc,alive in eps:
-                mc2 = C["green"] if method=="GET" else C["amber"]
+            eps = [
+                ("GET",  "/",        "Service info",              True,  False),
+                ("GET",  "/health",  "Model status check",        True,  False),
+                ("POST", "/predict", "Score a single claim",      ok2,   False),
+                ("GET",  "/metrics", "Model performance stats",   ok2,   False),
+                ("GET",  "/docs",    "Swagger UI — Interactive docs", True, True),
+                ("GET",  "/redoc",   "ReDoc — Full API reference",    True, True),
+            ]
+            for method, path, desc, alive, is_link in eps:
+                mc2 = C["green"] if method == "GET" else C["amber"]
                 bc3 = C["green"] if alive else C["red"]
+                link_html = (
+                    f"<a href='{API_BASE}{path}' target='_blank' "
+                    f"style='font-size:0.7rem;color:{C['blue']};margin-left:6px;'>↗ Open</a>"
+                    if is_link else ""
+                )
                 st.markdown(
                     f"<div style='background:#FFFFFF;border:1px solid {C['lgrey']};border-radius:4px;"
                     f"padding:0.45rem 1rem;margin-bottom:4px;display:flex;align-items:center;gap:0.8rem;'>"
                     f"<span style='background:{mc2}22;color:{mc2};border:1px solid {mc2};border-radius:3px;"
                     f"padding:1px 8px;font-family:monospace;font-size:0.7rem;font-weight:700;min-width:44px;text-align:center;'>{method}</span>"
                     f"<span style='font-family:monospace;color:{C['blue']};font-size:0.8rem;min-width:110px;'>{path}</span>"
-                    f"<span style='color:{C['grey']};font-size:0.78rem;flex:1;'>{desc}</span>"
+                    f"<span style='color:{C['grey']};font-size:0.78rem;flex:1;'>{desc}{link_html}</span>"
                     f"<span style='color:{bc3};font-size:0.72rem;font-weight:700;'>{'● OK' if alive else '● DOWN'}</span>"
                     f"</div>",
                     unsafe_allow_html=True,
@@ -1486,6 +1496,32 @@ elif page == "API":
             else: st.success("✅ Success"); st.json(res2)
 
     with api_t2:
+        # ── Live docs links ───────────────────────────────────────────────────
+        d1, d2 = st.columns(2)
+        with d1:
+            st.markdown(
+                f"<a href='{API_BASE}/docs' target='_blank' style='text-decoration:none;'>"
+                f"<div style='background:{C['navy']};color:#FFFFFF;border-radius:6px;padding:0.9rem 1rem;"
+                f"text-align:center;font-weight:700;font-size:0.88rem;'>"
+                f"📄 Open Swagger UI ↗<br>"
+                f"<span style='font-size:0.72rem;font-weight:400;opacity:0.8;'>"
+                f"Interactive · Try endpoints live</span></div></a>",
+                unsafe_allow_html=True,
+            )
+        with d2:
+            st.markdown(
+                f"<a href='{API_BASE}/redoc' target='_blank' style='text-decoration:none;'>"
+                f"<div style='background:{C['blue']};color:#FFFFFF;border-radius:6px;padding:0.9rem 1rem;"
+                f"text-align:center;font-weight:700;font-size:0.88rem;'>"
+                f"📘 Open ReDoc ↗<br>"
+                f"<span style='font-size:0.72rem;font-weight:400;opacity:0.8;'>"
+                f"Full reference · Clean layout</span></div></a>",
+                unsafe_allow_html=True,
+            )
+        st.markdown("<div style='height:0.6rem;'></div>", unsafe_allow_html=True)
+        st.info("⚠️ The API runs on Render's free tier — if it's been idle, the first request takes 20–30 s to cold-start. Click the links above once to wake it.", icon="💤")
+        st.markdown("<div style='height:0.4rem;'></div>", unsafe_allow_html=True)
+
         section("POST /predict — Insurance Claim Schema")
         st.code("""{
   // ── Core fraud signals (engineered into SHAP features) ──
