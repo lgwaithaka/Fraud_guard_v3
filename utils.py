@@ -267,11 +267,15 @@ def render_sidebar():
             badge = "🔴 Demo Mode · API offline"
             badge_color = "#E8A0A0"
 
+        model_html = (
+            f"<div style='font-size:0.6rem;color:#A0B4D0;margin-top:2px;'>Model: {model_name}</div>"
+            if ok else ""
+        )
         st.markdown(
             f"<div style='background:rgba(255,255,255,0.08);border-radius:4px;"
             f"padding:0.5rem 0.7rem;text-align:center;'>"
             f"<div style='font-size:0.68rem;color:{badge_color};font-weight:600;'>{badge}</div>"
-            f"{'<div style=\"font-size:0.6rem;color:#A0B4D0;margin-top:2px;\">Model: ' + model_name + '</div>' if ok else ''}"
+            f"{model_html}"
             f"</div>",
             unsafe_allow_html=True,
         )
